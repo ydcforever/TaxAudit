@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpco.audit.mapper.tax3.QueryPortionMapper">
+    <resultMap type="com.atpco.audit.model.AtpcoYQYRS1" id="AtpcoYQYRS1">
+        <result column="KEYID" property="keyid" jdbcType="DECIMAL"/>
+        <result column="REC_TYPE" property="recType" jdbcType="VARCHAR"/>
+        <result column="CXR_CODE" property="cxrCode" jdbcType="VARCHAR"/>
+        <result column="TAX_CODE" property="taxCode" jdbcType="VARCHAR"/>
+        <result column="SUB_CODE" property="subCode" jdbcType="VARCHAR"/>
+        <result column="FILLER" property="filler" jdbcType="VARCHAR"/>
+        <result column="MCN" property="mcn" jdbcType="VARCHAR"/>
+        <result column="SEQ_NO" property="seqNo" jdbcType="VARCHAR"/>
+        <result column="FILLER2" property="filler2" jdbcType="VARCHAR"/>
+        <result column="TRAVEL_EFF" property="travelEff" jdbcType="VARCHAR"/>
+        <result column="TRAVEL_DISC" property="travelDisc" jdbcType="VARCHAR"/>
+        <result column="TICKET_FIRST" property="ticketFirst" jdbcType="VARCHAR"/>
+        <result column="TICKET_LAST" property="ticketLast" jdbcType="VARCHAR"/>
+        <result column="CARRIER_APPL" property="carrierAppl" jdbcType="VARCHAR"/>
+        <result column="RTN_TO_ORIG" property="rtnToOrig" jdbcType="VARCHAR"/>
+        <result column="PSGR" property="psgr" jdbcType="VARCHAR"/>
+        <result column="FILLER3" property="filler3" jdbcType="VARCHAR"/>
+        <result column="POINT_OF_SALE_FILLER" property="pointOfSaleFiller" jdbcType="VARCHAR"/>
+        <result column="POINT_OF_SALE_TYPE" property="pointOfSaleType" jdbcType="VARCHAR"/>
+        <result column="POINT_OF_SALE_GEOGRAPHIC_L" property="pointOfSaleGeographicL" jdbcType="VARCHAR"/>
+        <result column="POINT_OF_SALE_CODE" property="pointOfSaleCode" jdbcType="VARCHAR"/>
+        <result column="POINT_OF_SALE_CODE_VALUE" property="pointOfSaleCodeValue" jdbcType="VARCHAR"/>
+        <result column="POINT_OF_TICKETING" property="pointOfTicketing" jdbcType="VARCHAR"/>
+        <result column="POINT_OF_TICKETING_VALUE" property="pointOfTicketingValue" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_INDICATOR" property="jrnyGeoSpecIndicator" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_LOC1" property="jrnyGeoSpecLoc1" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_LOC1_VALUE" property="jrnyGeoSpecLoc1Value" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_LOC2" property="jrnyGeoSpecLoc2" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_LOC2_VALUE" property="jrnyGeoSpecLoc2Value" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_VIA_LOC" property="jrnyGeoSpecViaLoc" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_VIA_LOC_VALUE" property="jrnyGeoSpecViaLocValue" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_TRVL_W_W_L" property="jrnyGeoSpecTrvlWWL" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_TRVL_W_W_L_V" property="jrnyGeoSpecTrvlWWLV" jdbcType="VARCHAR"/>
+        <result column="SECTOR_PRT_GEO_SPEC" property="sectorPrtGeoSpec" jdbcType="VARCHAR"/>
+        <result column="SECTOR_PRT_FROM_TO" property="sectorPrtFromTo" jdbcType="VARCHAR"/>
+        <result column="SECTOR_PRT_LOC1" property="sectorPrtLoc1" jdbcType="VARCHAR"/>
+        <result column="SECTOR_PRT_LOC1_VALUE" property="sectorPrtLoc1Value" jdbcType="VARCHAR"/>
+        <result column="SECTOR_PRT_LOC2" property="sectorPrtLoc2" jdbcType="VARCHAR"/>
+        <result column="SECTOR_PRT_LOC2_VALUE" property="sectorPrtLoc2Value" jdbcType="VARCHAR"/>
+        <result column="SECTOR_PRT_VIA_GEO" property="sectorPrtViaGeo" jdbcType="VARCHAR"/>
+        <result column="SECTOR_PRT_VIA_GEO_VALUE" property="sectorPrtViaGeoValue" jdbcType="VARCHAR"/>
+        <result column="SECTOR_PRT_VIA_STP_CNX" property="sectorPrtViaStpCnx" jdbcType="VARCHAR"/>
+        <result column="SECTOR_PRT_VIA_EXC_STOP_TIME" property="sectorPrtViaExcStopTime" jdbcType="VARCHAR"/>
+        <result column="SECTOR_PRT_VIA_EXC_STOP_T_U" property="sectorPrtViaExcStopTU" jdbcType="VARCHAR"/>
+        <result column="SECTOR_PRT_VIA_CNX_EXEMPT" property="sectorPrtViaCnxExempt" jdbcType="VARCHAR"/>
+        <result column="SECTOR_PRT_INTL_DOM" property="sectorPrtIntlDom" jdbcType="VARCHAR"/>
+        <result column="FILLER4" property="filler4" jdbcType="VARCHAR"/>
+        <result column="CXR_FLT_TBL_NO_186" property="cxrFltTblNo186" jdbcType="VARCHAR"/>
+        <result column="FILLER5" property="filler5" jdbcType="VARCHAR"/>
+        <result column="RBD" property="rbd" jdbcType="VARCHAR"/>
+        <result column="RBD2" property="rbd2" jdbcType="VARCHAR"/>
+        <result column="RBD3" property="rbd3" jdbcType="VARCHAR"/>
+        <result column="EQP" property="eqp" jdbcType="VARCHAR"/>
+        <result column="FARE_BASIS_CODE" property="fareBasisCode" jdbcType="VARCHAR"/>
+        <result column="FILLER6" property="filler6" jdbcType="VARCHAR"/>
+        <result column="BATCH_CI" property="batchCi" jdbcType="VARCHAR"/>
+        <result column="BATCH_NO" property="batchNo" jdbcType="VARCHAR"/>
+        <result column="FILLER7" property="filler7" jdbcType="VARCHAR"/>
+        <result column="SERVICE_FEE_AMOUNT" property="serviceFeeAmount" jdbcType="VARCHAR"/>
+        <result column="SERVICE_FEE_CUR" property="serviceFeeCur" jdbcType="VARCHAR"/>
+        <result column="SERVICE_FEE_DEC" property="serviceFeeDec" jdbcType="VARCHAR"/>
+        <result column="SERVICE_FEE_PERCENT" property="serviceFeePercent" jdbcType="VARCHAR"/>
+        <result column="SERVICE_FEE_TAX" property="serviceFeeTax" jdbcType="VARCHAR"/>
+        <result column="SERVICE_FEE_APPLICATION" property="serviceFeeApplication" jdbcType="VARCHAR"/>
+        <result column="TXT_TBL_NO_196" property="txtTblNo196" jdbcType="VARCHAR"/>
+        <result column="FILLER8" property="filler8" jdbcType="VARCHAR"/>
+        <result column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="HEADER_ID" property="headerId" jdbcType="VARCHAR"/>
+        <result column="YDC_CLASS" property="ydcClass" jdbcType="VARCHAR"/>
+        <result column="USE_LIMIT" property="useLimit" jdbcType="VARCHAR"/>
+        <result column="TRAVEL_E" property="travelE" jdbcType="VARCHAR"/>
+        <result column="TRAVEL_D" property="travelD" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="queryPortion" parameterType="java.util.Map"
+            statementType="CALLABLE">
+        <!--statementType 存储过程 -->
+        {CALL
+        YDC_YQ_QUERY(
+        #{routing,mode=IN,jdbcType=VARCHAR},
+        #{portion_start_no,mode=IN,jdbcType=NUMERIC},
+        #{portion_end_no,mode=IN,jdbcType=NUMERIC},
+        #{atpco_booking_date,mode=IN,jdbcType=VARCHAR},
+        #{atpco_travel_date,mode=IN,jdbcType=VARCHAR},
+        #{passenger_type,mode=IN,jdbcType=VARCHAR},
+        #{clazz,mode=IN,jdbcType=VARCHAR},
+        #{ticketingCarrier, mode=IN, jdbcType=VARCHAR},
+        #{marketing_cxr_code,mode=IN,jdbcType=VARCHAR},
+        #{operating_carrier, mode=IN, jdbcType=VARCHAR},
+        #{flights, mode=IN, jdbcType=VARCHAR},
+        #{fee_type,mode=IN,jdbcType=VARCHAR},
+        #{turnaround_no,mode=IN,jdbcType=NUMERIC},
+        #{departure_date,mode=IN,jdbcType=VARCHAR},
+        #{arrival_date,mode=IN,jdbcType=VARCHAR},
+
+        #{result_recs,jdbcType=CURSOR,javaType=java.sql.ResultSet,resultMap=AtpcoYQYRS1,mode=OUT}
+        )}
+    </select>
+</mapper>

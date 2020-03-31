@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpco.audit.mapper.share.AtpcoTTBS183Mapper">
+    <resultMap type="com.atpco.audit.model.AtpcoTTBS183" id="AtpcoTTBS183">
+        <result column="REC_TYPE" property="recType" jdbcType="VARCHAR"/>
+        <result column="ACTION" property="action" jdbcType="VARCHAR"/>
+        <result column="TBL_ID" property="tblId" jdbcType="VARCHAR"/>
+        <result column="TBL_NO" property="tblNo" jdbcType="VARCHAR"/>
+        <result column="FILLER1" property="filler1" jdbcType="VARCHAR"/>
+        <result column="TRVL_AGENCY" property="trvlAgency" jdbcType="VARCHAR"/>
+        <result column="CXR_GDS_CODE" property="cxrGdsCode" jdbcType="VARCHAR"/>
+        <result column="DUTY_FUNCTION_CODE" property="dutyFunctionCode" jdbcType="VARCHAR"/>
+        <result column="GEO_SPEC_TYPE" property="geoSpecType" jdbcType="VARCHAR"/>
+        <result column="GEO_SPEC1" property="geoSpec1" jdbcType="VARCHAR"/>
+        <result column="FILLER2" property="filler2" jdbcType="VARCHAR"/>
+        <result column="LOCATIONS_TYPE" property="locationsType" jdbcType="VARCHAR"/>
+        <result column="LOCATIONS_CODE" property="locationsCode" jdbcType="VARCHAR"/>
+        <result column="VIEW_IND" property="viewInd" jdbcType="VARCHAR"/>
+        <result column="FILLER3" property="filler3" jdbcType="VARCHAR"/>
+        <result column="REST" property="rest" jdbcType="VARCHAR"/>
+        <result column="MD5" property="md5" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <select id="query183" resultMap="AtpcoTTBS183">
+        SELECT DISTINCT * FROM ATPCO_TTBS_183 WHERE TBL_NO = #{no}
+    </select>
+</mapper>

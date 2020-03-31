@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpco.audit.mapper.share.AtpcoTTBS168Mapper">
+    <resultMap type="com.atpco.audit.model.AtpcoTTBS168" id="AtpcoTTBS168">
+        <result column="REC_TYPE" property="recType" jdbcType="VARCHAR"/>
+        <result column="ACTION" property="action" jdbcType="VARCHAR"/>
+        <result column="TBL_ID" property="tblId" jdbcType="VARCHAR"/>
+        <result column="TBL_NO" property="tblNo" jdbcType="VARCHAR"/>
+        <result column="FILLER" property="filler" jdbcType="VARCHAR"/>
+        <result column="APPL" property="appl" jdbcType="VARCHAR"/>
+        <result column="FEE_OWNER_CXR" property="feeOwnerCxr" jdbcType="VARCHAR"/>
+        <result column="TAX_CD" property="taxCd" jdbcType="VARCHAR"/>
+        <result column="TAX_TYPE_SUB_CODE" property="taxTypeSubCode" jdbcType="VARCHAR"/>
+        <result column="SERVICE_TYPE" property="serviceType" jdbcType="VARCHAR"/>
+        <result column="ATTRIBUTES_GROUP" property="attributesGroup" jdbcType="VARCHAR"/>
+        <result column="ATTRIBUTES_SUB_GROUP" property="attributesSubGroup" jdbcType="VARCHAR"/>
+        <result column="REST" property="rest" jdbcType="VARCHAR"/>
+        <result column="MD5" property="md5" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="query168" resultMap="AtpcoTTBS168">
+        SELECT DISTINCT * FROM ATPCO_TTBS_168 WHERE TBL_NO = #{no}
+    </select>
+</mapper>

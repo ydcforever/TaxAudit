@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpco.audit.mapper.tax3.RoutingTestMapper">
+    <resultMap type="com.atpco.audit.model.RoutingTest" id="RoutingTest">
+        <result column="ID" property="id" jdbcType="DECIMAL"/>
+        <result column="ROUTING" property="routing" jdbcType="VARCHAR"/>
+        <result column="ETDZ_DATE" property="etdzDate" jdbcType="VARCHAR"/>
+        <result column="OPER_CARRIER" property="operCarrier" jdbcType="VARCHAR"/>
+        <result column="MARKET_CARRIER" property="marketCarrier" jdbcType="VARCHAR"/>
+        <result column="DEPART_DATE" property="departDate" jdbcType="VARCHAR"/>
+        <result column="ARRIVAL_DATE" property="arrivalDate" jdbcType="VARCHAR"/>
+        <result column="CURRENCY_TYPE" property="currencyType" jdbcType="VARCHAR"/>
+        <result column="FARE_AMT" property="fareAmt" jdbcType="VARCHAR"/>
+        <result column="SALE_AMT" property="saleAmt" jdbcType="VARCHAR"/>
+        <result column="PAY_AMT" property="payAmt" jdbcType="VARCHAR"/>
+        <result column="TAX_AMT" property="taxAmt" jdbcType="VARCHAR"/>
+        <result column="AIRPORT_TAX" property="airportTax" jdbcType="VARCHAR"/>
+        <result column="FUEL_TAX" property="fuelTax" jdbcType="VARCHAR"/>
+        <result column="CABIN_CODE" property="cabinCode" jdbcType="VARCHAR"/>
+        <result column="PAX_TYPE" property="paxType" jdbcType="VARCHAR"/>
+        <result column="BIRTHDAY" property="birthday" jdbcType="VARCHAR"/>
+        <result column="SITE_CODE" property="siteCode" jdbcType="VARCHAR"/>
+        <result column="SOURCE" property="source" jdbcType="VARCHAR"/>
+        <result column="YDC_YQ" property="ydcYq" jdbcType="DECIMAL"/>
+        <result column="YDC_TAX" property="ydcTax" jdbcType="DECIMAL"/>
+        <result column="DIFF" property="diff" jdbcType="DECIMAL"/>
+        <result column="TAX_CHECK" property="taxCheck" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="query" resultMap="RoutingTest">
+        select * from ROUTING_3_TEST t where t.TAX_AMT > #{taxAmount}
+        <if test="diffLow != null and diffLow != ''">
+            and t.diff >= to_number(#{diffLow})
+        </if>
+        <if test="diffUp != null and diffUp != ''">
+            and t.diff <![CDATA[<]]>= to_number(#{diffUp})
+        </if>
+        order by t.DIFF
+    </select>
+</mapper>

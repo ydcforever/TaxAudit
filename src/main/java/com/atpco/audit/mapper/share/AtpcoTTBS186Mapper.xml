@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpco.audit.mapper.share.AtpcoTTBS186Mapper">
+    <resultMap type="com.atpco.audit.model.AtpcoTTBS186" id="AtpcoTTBS186">
+        <result column="REC_TYPE" property="recType" jdbcType="VARCHAR"/>
+        <result column="ACTION" property="action" jdbcType="VARCHAR"/>
+        <result column="TBL_ID" property="tblId" jdbcType="VARCHAR"/>
+        <result column="TBL_NO" property="tblNo" jdbcType="VARCHAR"/>
+        <result column="SEGS" property="segs" jdbcType="VARCHAR"/>
+        <result column="MARKETING_CARRIER" property="marketingCarrier" jdbcType="VARCHAR"/>
+        <result column="OPERATING_CARRIER" property="operatingCarrier" jdbcType="VARCHAR"/>
+        <result column="FLT_NO1" property="fltNo1" jdbcType="VARCHAR"/>
+        <result column="FLT_NO2" property="fltNo2" jdbcType="VARCHAR"/>
+        <result column="MD5" property="md5" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="query186" resultMap="AtpcoTTBS186">
+        SELECT DISTINCT * FROM ATPCO_TTBS_186 WHERE TBL_NO = #{no}
+    </select>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpco.audit.mapper.share.CurrencyRegulationMapper">
+    <resultMap type="com.atpco.audit.model.CurrencyRegulation" id="CurrencyRegulation">
+        <result column="CURRENCY_CODE" property="currencyCode" jdbcType="VARCHAR"/>
+        <result column="FROM_NUC" property="fromNuc" jdbcType="DECIMAL" javaType="java.lang.Double"/>
+        <result column="FARE_ROUND_UNIT" property="fareRoundUnit" jdbcType="DECIMAL" javaType="java.lang.Double"/>
+        <result column="TAX_OTHER_ROUND_UNIT" property="taxOtherRoundUnit" jdbcType="DECIMAL"
+                javaType="java.math.BigDecimal"/>
+        <result column="DECIMA_UNIT" property="decimaUnit" jdbcType="DECIMAL" javaType="java.lang.Integer"/>
+        <result column="STRONG_WEAK_FLAG" property="strongWeakFlag" jdbcType="VARCHAR"/>
+        <result column="CURRENCY_NAME" property="currencyName" jdbcType="VARCHAR"/>
+        <result column="COUNTRY_NAME" property="countryName" jdbcType="VARCHAR"/>
+        <result column="ROUNDING_DIRECTION" property="roundingDirection" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryCurrency" resultType="String">
+        select CURRENCY_CODE from CURRENCY_REGULATION
+    </select>
+
+    <select id="queryRegulations" resultMap="CurrencyRegulation">
+        select * from CURRENCY_REGULATION
+    </select>
+
+    <select id="queryRegulation" resultMap="CurrencyRegulation" parameterType="java.lang.String">
+        select * from CURRENCY_REGULATION where CURRENCY_CODE = #{currencyCode}
+    </select>
+</mapper>

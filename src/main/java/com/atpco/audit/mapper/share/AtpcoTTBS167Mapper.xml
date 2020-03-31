@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpco.audit.mapper.share.AtpcoTTBS167Mapper">
+    <resultMap type="com.atpco.audit.model.AtpcoTTBS167" id="AtpcoTTBS167">
+        <result column="REC_TYPE" property="recType" jdbcType="VARCHAR"/>
+        <result column="ACTION" property="action" jdbcType="VARCHAR"/>
+        <result column="TBL_ID" property="tblId" jdbcType="VARCHAR"/>
+        <result column="TBL_NO" property="tblNo" jdbcType="VARCHAR"/>
+        <result column="TICKET_CODE" property="ticketCode" jdbcType="VARCHAR"/>
+        <result column="APPL" property="appl" jdbcType="VARCHAR"/>
+        <result column="FBTD" property="fbtd" jdbcType="VARCHAR"/>
+        <result column="EQP" property="eqp" jdbcType="VARCHAR"/>
+        <result column="CABIN" property="cabin" jdbcType="VARCHAR"/>
+        <result column="RBD" property="rbd" jdbcType="VARCHAR"/>
+        <result column="FARE_TYPE" property="fareType" jdbcType="VARCHAR"/>
+        <result column="TARIFF" property="tariff" jdbcType="VARCHAR"/>
+        <result column="FARE_OWNING_CARRIER" property="fareOwningCarrier" jdbcType="VARCHAR"/>
+        <result column="RULE" property="rule" jdbcType="VARCHAR"/>
+        <result column="REST" property="rest" jdbcType="VARCHAR"/>
+        <result column="MD5" property="md5" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="query167" resultMap="AtpcoTTBS167">
+        select * from ATPCO_TTBS_169 where TBL_NO = #{no}
+    </select>
+</mapper>

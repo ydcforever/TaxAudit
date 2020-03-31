@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpco.audit.mapper.share.AreaPartitionMapper">
+    <resultMap type="com.atpco.audit.model.AreaPartition" id="AreaPartition">
+        <result column="AIRPORT_CODE" property="airportCode" jdbcType="VARCHAR"/>
+        <result column="CITY_CODE" property="cityCode" jdbcType="VARCHAR"/>
+        <result column="STATE_CODE" property="stateCode" jdbcType="VARCHAR"/>
+        <result column="COUNTRY_CODE" property="countryCode" jdbcType="VARCHAR"/>
+        <result column="ZONE_CODE" property="zoneCode" jdbcType="VARCHAR"/>
+        <result column="SUBZONE_CODE" property="subzoneCode" jdbcType="VARCHAR"/>
+        <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR"/>
+        <result column="SUBAREA_CODE" property="subareaCode" jdbcType="VARCHAR"/>
+        <result column="SUBCITY_CODE" property="subcityCode" jdbcType="VARCHAR"/>
+        <result column="US_50_STATES" property="us50States" jdbcType="VARCHAR"/>
+        <result column="SUBSTATE_CODE" property="substateCode" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryAreaPartition" resultMap="AreaPartition" parameterType="java.lang.String">
+        select * from AIRPORT_AREA_PARTITION where AIRPORT_CODE = #{airportCode}
+    </select>
+
+    <select id="queryAreaPartitions" resultMap="AreaPartition" parameterType="java.util.List">
+        select * from AIRPORT_AREA_PARTITION t
+        <if test="list !=null and list.size() > 0">
+            where t.AIRPORT_CODE in
+            <include refid="InClause"/>
+        </if>
+    </select>
+
+    <sql id="InClause">
+        <foreach collection="list" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+        </foreach>
+    </sql>
+</mapper>

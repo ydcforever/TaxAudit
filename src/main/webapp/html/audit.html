@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="./js/easyui/themes/icon.css" type="text/css"/>
+    <link rel="stylesheet" href="./js/easyui/themes/default/easyui.css" type="text/css"/>
+    <!--<script type="text/css">-->
+        <!--input {-->
+            <!--box-sizing: border-box;-->
+        <!--}-->
+    <!--</script>-->
+    <script type="text/javascript" src="./js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.json-2.3.js"></script>
+    <script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="./js/ydc/ydc.js"></script>
+    <script type="text/javascript" src="./js/ydc/table.js"></script>
+    <script type="text/javascript" src="./js/atpco/atpcoTTBSFields.js"></script>
+    <script type="text/javascript" src="./js/atpco/atpcoYQYRFields.js"></script>
+    <script type="text/javascript" src="./js/ydc/condition.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var routingCondition = [
+                {
+                    data :[
+                        {
+                            label: 'taxAmt',
+                            field: 'taxAmount',
+                            width: '100px',
+                            markStar: true,
+                            isInit: true,
+                            initData: "14"
+                        }, {
+                            label: 'diffLow',
+                            field: 'diffLow',
+                            width: '100px',
+                            isInit: true,
+                            initData: "14"
+                        }, {
+                            label: 'diffUp',
+                            field: 'diffUp',
+                            width: '100px'
+                        }
+                    ]
+                }
+            ];
+            new QueryConditions($("#routing-condition"), routingCondition, "routing");
+
+            var routingCols = Table.datagrid.initColumns(
+                    ['id','routing','etdzDate','operCarrier','marketCarrier','departDate','arrivalDate','currencyType',
+                        'fareAmt','saleAmt','payAmt','taxAmt','airportTax','fuelTax','cabinCode','paxType',
+                        'birthday','siteCode','source','ydcYq','ydcTax','diff','taxCheck'], true);
+            Table.datagrid.loadData($("#routing-table"), "Test",[], routingCols);
+
+            $("#searchbtn").click(function(){
+                var object = {};
+                $('.routing').each(function () {
+                    object[$(this).attr('id')] = $(this).val();
+                });
+                var queryCondition = encodeURIComponent($.toJSON(object));
+                Table.datagrid.load($("#routing-table"), "Test", './test/queryRouting.do?queryCondition=' + queryCondition, routingCols);
+
+//                var options = $("#routing-table").datagrid("getPager").data("pagination").options;
+//                console.log(options.pageNumber);
+//                console.log(options.total);
+//                console.log(options.pageSize);
+            });
+
+            $("#routing-table").datagrid({
+                onSelect : function (index, row) {
+                    $("#sale_currency").val(row.currencyType);
+                    $("#passenger_type").val(row.paxType);
+                    $("#booking_date").val(row.etdzDate);
+                    $("#travel_date").val(row.etdzDate);
+                    $("#atpco_booking_date").val(row.etdzDate);
+                    $("#atpco_travel_date").val(row.etdzDate);
+                    $("#routing").val(row.routing);
+                    $("#departure_date").val(row.departDate);
+                    $("#arrival_date").val(row.arrivalDate);
+                    $("#marketing_carrier").val(row.marketCarrier);
+                    $("#operating_carrier").val(row.operCarrier);
+                    $("#carrier").val(row.marketCarrier);
+                    $("#clazz").val(row.cabinCode);
+                }
+            });
+
+            var queryTaxYQCondition = [
+                {
+                    data: [
+                        {
+                            label: '航线',
+                            field: 'routing',
+                            fieldCol : "5",
+                            markStar: true,
+                            isInit: true,
+                            initData: "PVG-FRA;FRA-PVG",
+                            classify: "taxPoint portion hp tax2 rest"
+                        }
+                    ]
+                },
+                {
+                    data: [
+                        {
+                            label: 'bookingDate',
+                            field: 'booking_date',
+                            width : '175%',
+                            markStar: true,
+                            isInit: true,
+                            initData: YDC.dateOperation.currentDate(),
+                            classify: "taxPoint tax2 rest easyui-databox"
+                        },
+                        {
+                            label: 'psgType',
+                            field: 'passenger_type',
+                            markStar: true,
+                            useDataList: true,
+                            isInit: true,
+                            initData: ['ADT', 'CHD', 'INF'],
+                            selectedData : "ADT",
+                            classify: "taxPoint portion hp tax2 rest"
+                        },
+                        {label: 'psgAge', field: 'passenger_age', classify: "taxPoint"}
+                    ]
+                },
+                {
+                    data: [
+                        {
+                            label: 'psgIdentity',
+                            field: 'passenger_identity',
+                            useDataList: true,
+                            isInit: true,
+                            initData: ['R', 'E', 'N'],
+                            classify: "taxPoint"
+                        },
+                        {label: 'psgRegionType', field: 'passenger_region_type', classify: "taxPoint",
+                        isInit : true, useDataList : true, initData : ["P","C","S","N","Z","A"]},
+                        {label: 'psgRegion', field: 'passenger_region', classify: "taxPoint"}
+                    ]
+                },
+                {
+                    data: [
+                        {label: 'saleOrganization', field: 'sale_organization', classify: "taxPoint"},
+                        {label: 'salePoint', field: 'sale_point', isInit: true, initData: 'CN', classify: "taxPoint"},
+                        {
+                            label: 'ticketPoint',
+                            field: 'ticket_point',
+                            isInit: true,
+                            initData: 'CN',
+                            classify: "taxPoint"
+                        }
+                    ]
+                },
+                {
+                    data: [
+                        {
+                            label: 'marketingCarrier',
+                            field: 'marketing_carrier',
+                            fieldCol : "5",
+                            isInit:true,
+                            initData: "MU;MU",
+                            classify: "taxPoint rest"
+                        }
+                    ]
+                },
+                {
+                    data: [
+                        {label: 'operatingCarrier', field: 'operating_carrier', fieldCol : "5",
+                            isInit:true, initData: "MU;MU",
+                            classify: "taxPoint hp rest portion"}
+                    ]
+                }, {
+                    data: [
+                        {label: 'fareBase', field: 'fare_base', classify: "taxPoint"},
+                        {label: 'fareAmount', field: 'fare_amount', isInit:true, initData: "0", classify:"tax2 rest"},
+                        {label: 'obFee', field: 'ob_fee'}
+                    ]
+                }, {
+                    data: [
+                        { label: 'flightRelatedFee', field: 'services_flight_related_fee'},
+                        {label: 'ticketRelatedFee', field: 'services_ticket_related_fee'},
+                        {label: 'merchandiseFee', field: 'services_merchandise_fee'}
+                    ]
+                }, {
+                    data: [
+                        {label: 'servicesOcFee', field: 'services_oc_fee'},
+                        {label: 'baggageCharges', field: 'baggage_charges'},
+                        {label: 'odFee', field: 'od_fee'}
+                    ]
+                }, {
+                    data: [
+                        {
+                            label: 'departDate',
+                            field: 'departure_date',
+                            fieldCol : "5",
+                            isInit : true,
+                            initData : "2019-11-01 10:00;2019-11-02 10:00",
+                            classify: "taxPoint portion hp tax2 rest"}
+                    ]
+                }, {
+                    data: [
+                        {
+                            label: 'arriveDate',
+                            field: 'arrival_date',
+                            fieldCol : "5",
+                            isInit : true,
+                            initData : "2019-11-01 12:00;2019-11-02 12:00",
+                            classify: "taxPoint portion hp tax2 rest"}
+                    ]
+                }, {
+                    data: [
+                        {
+                            label: 'clazz',
+                            field: 'clazz',
+                            markStar: true,
+                            isInit : true,
+                            initData : "Y;Y",
+                            classify: "taxPoint hp tax2 rest portion"},
+                        {
+                            label: 'cur',
+                            field: 'sale_currency',
+                            markStar: true,
+                            useDataList: true,
+                            isInit: true,
+                            useUrlInit: true,
+                            initUrl: './currency/queryCurrency.do',
+                            selectedData : "CNY",
+                            classify: "taxPoint hp tax2 rest"
+                        },
+                        {
+                            label: '折返点',
+                            field: 'turnaround_no'
+                        }
+                    ]
+                }
+            ];
+            new QueryConditions($('#param'), queryTaxYQCondition, 'queryInput');
+
+            $('#booking_date').datebox({
+                closeText:"关闭",
+                formatter:function(date){
+                    var y = date.getFullYear();
+                    var m = date.getMonth() + 1;
+                    var d = date.getDate();
+
+                    return y+"-"+m+"-"+d;
+                },
+                parser:function(str){
+                    var t = Date.parse(str);
+                    if (!isNaN(t))
+                        return new Date(t);
+                    else
+                        return new Date();
+                }
+            });
+            //$(".combo-text").css({"text-align" : "center"});
+
+            var taxPointCondition = [
+                {
+                    data: [
+                        {label: 'taxPointNo', field: 'tax_point_no', markStar: true},
+                        {
+                            label: 'travelDate',
+                            field: 'travel_date',
+                            isInit: true,
+                            initData: $("#booking_date").val()
+                        },
+                        {label: 'stopStatues', field: 'stopover_status'}
+                    ]
+                }
+            ];
+            new QueryConditions($('#tax-point-condition'), taxPointCondition, 'taxPoint');
+
+            var portionCondition = [
+                {
+                    data : [
+                        {
+                            label: 'portionStartNo',
+                            field: 'portion_start_no',
+                            markStar: true
+                        }, {
+                            label: 'portionEndNo',
+                            field: 'portion_end_no',
+                            markStar: true
+                        }, {
+                            label: 'turnaroundNo',
+                            field: 'turnaround_no',
+                            markStar: true
+                        }
+                    ]
+                }, {
+                    data : [
+                        {
+                            label: 'bookingDate',
+                            field: 'atpco_booking_date',
+                            markStar: true,
+                            isInit : true,
+                            initData : $("#booking_date").val()
+                        }, {
+                            label: 'travelDate',
+                            field: 'atpco_travel_date',
+                            markStar: true,
+                            isInit : true,
+                            initData : $("#booking_date").val()
+                        }
+                    ]
+                }, {
+                    data : [
+                        {
+                            label: 'feeType',
+                            field: 'fee_type',
+                            markStar: true,
+                            isInit :true,
+                            useDataList:true,
+                            initData:["F","I"],
+                            selectedData : "F"
+                        }, {
+                            label: 'marketingCxrCode',
+                            field: 'marketing_cxr_code',
+                            markStar: true,
+                            isInit : true,
+                            initData : "MU"
+                        }
+                    ]
+                }
+            ];
+            new QueryConditions($('#portion-condition'), portionCondition, 'portion');
+
+            var hpCondition = [
+                {
+                    data : [
+                        {label : "ticketingCarrier", field :"ticketingCarrier", isInit : true, initData : "MU", classify : "portion"}
+                    ]
+                }, {
+                    data : [
+                        {label : "flightNumber", field : "flights", width:"481%", classify : "queryInput rest portion"}
+                    ]
+                }, {
+                    data : [
+                        {label : "planeType", field : "plane_types",width:"481%", classify : "queryInput rest"}
+                    ]
+                }, {
+                    data : [
+                        {label : "carrier", field : "carrier", width:"481%"}
+                    ]
+                }
+            ];
+            new QueryConditions($('#hpCondition'), hpCondition, 'hp');
+
+            $('.querySpan').css({'width': '150px'});
+
+            $("#query").click(function () {
+                var object = {};
+                $('.queryInput').each(function () {
+                    object[$(this).attr('id')] = $(this).val();
+                });
+                $.ajax({
+                    url: './tax3/queryTax.do',
+                    data: {queryCondition: $.toJSON(object)},
+                    dataType: "json",
+                    success: function (data) {
+                        Table.simple.horizontal($("#result"), data,
+                                [
+                                    {label: "税种", field: "tax_code"},
+                                    {label: "金额", field: "BTW_AMT"},
+                                    {label: "货币", field: "sales_curr"}
+                                ]);
+                    },
+                    error: function () {
+                        $.messager.show({
+                            title : '提示信息',
+                            msg : '三期异常'
+                        });
+                    }
+                });
+            });
+
+            var cntHP = localStorage.getItem("cntHP");
+            if (cntHP == undefined) {
+                cntHP = 0;
+                localStorage.setItem("cntHP", cntHP);
+            }
+            $("#cntHP").attr("value",cntHP);
+            $("#queryHP").click(function() {
+                var cntHP = localStorage.getItem("cntHP");
+                cntHP++;
+                localStorage.setItem("cntHP", cntHP);
+                $("#cntHP").attr("value",cntHP);
+                var object = {};
+                $('.hp').each(function () {
+                    object[$(this).attr('id')] = $(this).val();
+                });
+                $.ajax({
+                    url: './HP/query.do',
+                    data: {queryCondition: $.toJSON(object)},
+                    dataType: "json",
+                    success: function (data) {
+                        Table.simple.horizontal($("#resultHp"), data, [
+                            {label: "国家", field: "countryCode"},
+                            {label: "税种", field: "taxCode"},
+                            {label: "税名", field: "taxName"},
+                            {label: "金额", field: "amount"},
+                            {label: "货币", field: "currencyCode"},
+                            {label: "免征", field: "isEXEMPT	"}]
+                        );
+                    },
+                    error: function () {
+                        $.messager.show({
+                            title : '提示信息',
+                            msg : '黑屏异常'
+                        });
+                    }
+                });
+            });
+
+            $("#booking_date").on("change",function() {
+                var date = $("#booking_date").val();
+                $("#travel_date").attr("value", date);
+                $("#atpco_booking_date").attr("value", date);
+                $("#atpco_travel_date").attr("value", date);
+            });
+
+            $("#air").blur(function () {
+                var airport = $("#air").val();
+                $.ajax({
+                    url: './airport/queryAreaPartition.do',
+                    data: {airport: airport},
+                    dataType: "json",
+                    success: function (data) {
+                        Table.simple.vertical($("#area-info"), data);
+                    },
+                    error: function () {
+                        $.messager.show({
+                            title : '提示信息',
+                            msg : airport + ' not found!'
+                        });
+                    }
+                });
+            });
+            $("#queryTaxPoint").click(function () {
+                var object = {};
+                $('.taxPoint').each(function () {
+                    object[$(this).attr('id')] = $(this).val();
+                });
+                var queryCondition = encodeURIComponent($.toJSON(object));
+                Table.datagrid.load($("#ttbs-table"), "X1", "./tax3/queryTaxPoint.do?queryCondition=" + queryCondition, x1Columns, createTTBSSubTable);
+            });
+
+            $("#queryPortion").click(function () {
+                var object = {};
+                $('.portion').each(function () {
+                    object[$(this).attr('id')] = $(this).val();
+                });
+                var queryCondition = encodeURIComponent($.toJSON(object));
+                Table.datagrid.load($("#yqyr-table"), "S1", "./tax3/queryPortion.do?queryCondition=" + queryCondition, S1Columns, createYQYRSubTable);
+            });
+
+            $("#queryTax2").click(function() {
+                var object = {};
+                $('.tax2').each(function () {
+                    object[$(this).attr('id')] = $(this).val();
+                });
+                $.ajax({
+                    url: './tax2/queryTax.do',
+                    data: {queryCondition: $.toJSON(object)},
+                    dataType: "json",
+                    success: function (data) {
+                        Table.simple.horizontal($("#resultTax2"), data, [
+                                    {label: "税种", field: "taxcd"},
+                                    {label: "描述", field: "desc"},
+                                    {label: "金额", field: "taxAmount"}
+                                    ]
+                        );
+                    },
+                    error: function () {
+                        $.messager.show({
+                            title : '提示信息',
+                            msg : '7*24异常'
+                        });
+                    }
+                });
+            });
+
+            $("#queryTax2Ex").click(function() {
+                var object = {};
+                $('.tax2').each(function () {
+                    object[$(this).attr('id')] = $(this).val();
+                });
+                $.ajax({
+                    url: './tax2Ex/queryTax.do',
+                    data: {queryCondition: $.toJSON(object)},
+                    dataType: "json",
+                    success: function (data) {
+                        Table.simple.horizontal($("#resultTax2Ex"), data, [
+                                    {label: "航段", field: "coupon"},
+                                    {label: "税种", field: "taxcd"},
+                                    {label: "金额", field: "taxAmount"}
+                                ]
+                        );
+                    },
+                    error: function () {
+                        $.messager.show({
+                            title : '提示信息',
+                            msg : '退改签异常'
+                        });
+                    }
+                });
+            });
+
+            $("#queryRestPro").click(function(){
+                var obj = getParam($(".queryInput"));
+                $.ajax({
+                    url: './restful/pro3.do',
+                    data: {queryCondition: $.toJSON(obj)},
+                    dataType: "json",
+                    success: function (data) {
+                        Table.simple.horizontal($("#restPro"), data.routeList[0].passenger[0].taxes, [
+                                    {label: "税种", field: "code"},
+                                    {label: "restSQL", field: "description"},
+                                    {label: "金额", field: "amount"},
+                                    {label: "货币", field: "currency"}
+                                ]
+                        );
+                    },
+                    error : function() {
+                        $.messager.show({
+                            title : '提示信息',
+                            msg : 'Restful异常'
+                        });
+                    }
+                });
+            });
+
+            $("#queryRest").click(function(){
+                var object = {};
+                $('.rest').each(function () {
+                    object[$(this).attr('id')] = $(this).val();
+                });
+                $.ajax({
+                    url: './restful/query.do',
+                    data: {queryCondition: $.toJSON(object)},
+                    dataType: "json",
+                    success: function (data) {
+                        Table.simple.horizontal($("#restful"), data.taxes, [
+                                    {label: "税种", field: "code"},
+                                    {label: "restJava", field: "desc"},
+                                    {label: "金额", field: "amount"},
+                                    {label: "货币", field: "curr"}
+                                ]
+                        );
+                    },
+                    error : function() {
+                        $.messager.show({
+                            title : '提示信息',
+                            msg : 'Restful异常'
+                        });
+                    }
+                });
+            });
+
+            $("#clear").click(function(){
+                $('input[type="text"]').attr('value',"");
+            });
+
+            $("#hidden").click(function(){
+                var ht = $("#ht");
+                var display =  ht.css("display");
+                if(display == "none") {
+                    ht.css("display", "block");
+                } else {
+                    ht.css("display", "none");
+                }
+            });
+        });
+
+        function show() {
+            $('#area-info').css("display", "block");
+        }
+        function hideArea() {
+            $("#area-info").css("display", "none");
+        }
+
+        function createYQYRSubTable(field, value){
+            if (field == "jrnyGeoSpecLoc1Value"||
+                    field == "jrnyGeoSpecLoc2Value"||
+                    field == "jrnyGeoSpecViaLocValue"||
+                    field == "jrnyGeoSpecTrvlWWL"||
+                    field == "sectorPrtLoc1Value"||
+                    field == "sectorPrtLoc2Value"||
+                    field == "sectorPrtViaGeoValue") {
+                Table.datagrid.load($("#sub-table"), 'YQYR_178', './atpco/ttbs/178/query.do?customNo=' + value, yqyr178Columns);
+            }
+        }
+
+        function createTTBSSubTable(field, value) {
+            if (field == "cxfOrFltTblNo186") {
+                Table.datagrid.load($("#sub-table"), 'TTBS_186', './atpco/ttbs/186/query.do?customNo=' + value, ttbs186Columns);
+            } else if (field == "ptcTable169") {
+                Table.datagrid.load($("#sub-table"), 'TTBS_169', './atpco/ttbs/169/query.do?customNo=' + value, ttbs169Columns);
+            } else if (field == "pointOfSaleInfo" || field == "POfTicketingGeoSpecInfo"
+                    || field == "POfDeliveryGeoSpecInfo" || field == "jrnyGeoSpecLoc1Info"
+                    || field == "jrnyGeoSpecLoc2Info" || field == "jrnyGeoSpecJoInInfo"
+                    || field == "jrnyGeoSpecTrvlInLocInfo" || field == "taxPointLoc1Info"
+                    || field == "taxPointLoc2Info" || field == "taxPointLoc3Info") {
+                Table.datagrid.load($("#sub-table"), 'TTBS_178', './atpco/ttbs/178/query.do?customNo=' + value, ttbs178Columns);
+            } else if (field == "sectorDetailTableNo167") {
+                Table.datagrid.load($("#sub-table"), 'TTBS_167', './atpco/ttbs/167/query.do?customNo=' + value, ttbs167Columns);
+            } else if (field == "carrierAppltableNo190") {
+                Table.datagrid.load($("#sub-table"), 'TTBS_190', './atpco/ttbs/190/query.do?customNo=' + value, ttbs190Columns);
+            } else if (field == "serviceAndBaggageTable168") {
+                Table.datagrid.load($("#sub-table"), 'TTBS_168', './atpco/ttbs/168/query.do?customNo=' + value, ttbs168Columns);
+            } else if (field == "securityTableNo183") {
+                Table.datagrid.load($("#sub-table"), 'TTBS_183', './atpco/ttbs/183/query.do?customNo=' + value, ttbs183Columns);
+            }
+        }
+    </script>
+</head>
+<body>
+<div>
+    <a id="searchbtn" class="easyui-linkbutton">查询</a>
+    <a id="hidden" class="easyui-linkbutton">隐藏</a>
+    <div id="ht">
+        <div id="routing-condition"></div>
+        <div style="height: 400px">
+            <table id="routing-table"></table>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 40px;">
+    <div style="float: left">
+        <span>机场信息</span>
+
+        <div id="show" onmouseover="show()" onmouseout="hideArea()" style="width: 100px; height:30px;">
+            <input id="air" type="text"/>
+            <table id="area-info"></table>
+        </div>
+    </div>
+
+    <div id="param" style="margin-left: 150px;"></div>
+
+
+    <div style="margin-left: 150px;">
+        <span>黑屏参数</span>
+        <div id="hpCondition">
+
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 40px">
+    <input id="query" type="button" value="三期" name="button"/>
+    <input id="queryHP" type="button" value="黑屏" name="button"/>
+    <input id="queryRestPro" type="button" value="restSQL" name="button"/>
+    <input id="queryRest" type="button" value="restJava" name="button"/>
+    <input id="queryTax2" type="button" value="二期" name="button"/>
+    <input id="queryTax2Ex" type="button" value="二期退改签" name="button"/>
+    <input id="clear" type="button" value="清除所有" name="button"/>
+    <input id="cntHP" type="text" readonly="true"/>
+    <div>
+        <table id="result" align="left"></table>
+        <table id="resultHp" align="right"></table>
+    </div>
+</div>
+
+<div style="margin-top:300px; clear: both">
+    <table id="restPro" align="left"></table>
+    <table id="restful" align="right"></table>
+</div>
+
+
+<div style="margin-top:300px; clear: both">
+    <table id="resultTax2" align="left"></table>
+    <table id="resultTax2Ex" align="right"></table>
+</div>
+
+
+
+<div id="taxPoint" style="margin-left: 150px; margin-top: 20px; clear: both">
+    <input id="queryTaxPoint" type="button" value="机场税查询" name="button"/>
+
+    <div id="tax-point-condition"></div>
+
+    <div style="height: 400px;">
+        <table id="ttbs-table"></table>
+    </div>
+
+    <div style="height: 200px; padding-top: 50px;">
+        <table id="sub-table"></table>
+    </div>
+</div>
+
+<div id="portion" style="padding-top: 50px; margin-left: 150px; clear: both">
+    <input id="queryPortion" type="button" value="燃油费查询" name="button">
+    <span style="color:red;">新增用于外航的ticket cxr(黑屏)，operating cxr，flight no入参，调整clazz为全航段入参，请填完整</span>
+    <div id="portion-condition"></div>
+    <div style="height: 400px; padding-top: 50px;">
+        <table id="yqyr-table"></table>
+    </div>
+</div>
+</body>
+
+</html>

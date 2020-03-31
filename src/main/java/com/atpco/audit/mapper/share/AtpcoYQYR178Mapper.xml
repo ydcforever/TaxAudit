@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpco.audit.mapper.share.AtpcoYQYR178Mapper">
+    <resultMap type="com.atpco.audit.model.AtpcoYQYR178" id="AtpcoYQYR178">
+        <result column="REC_TYPE" property="recType" jdbcType="VARCHAR"/>
+        <result column="ACTION" property="action" jdbcType="VARCHAR"/>
+        <result column="TBL_ID" property="tblId" jdbcType="VARCHAR"/>
+        <result column="TBL_NO" property="tblNo" jdbcType="VARCHAR"/>
+        <result column="APPL" property="appl" jdbcType="VARCHAR"/>
+        <result column="GEO_LOC_TYPE" property="geoLocType" jdbcType="VARCHAR"/>
+        <result column="GEO_LOC_VALUE" property="geoLocValue" jdbcType="VARCHAR"/>
+        <result column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="HEADER_ID" property="headerId" jdbcType="VARCHAR"/>
+        <result column="EFFECTIVE_DATE" property="effectiveDate" jdbcType="DATE" javaType="String"/>
+        <result column="EXPIRY_DATE" property="expiryDate" jdbcType="DATE" javaType="String"/>
+    </resultMap>
+    <select id="query178" resultMap="AtpcoYQYR178">
+        SELECT DISTINCT * FROM ATPCO_YQYR_178 WHERE TBL_NO = #{no}
+    </select>
+</mapper>

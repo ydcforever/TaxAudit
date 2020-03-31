@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpco.audit.mapper.share.AtpcoTTBS169Mapper">
+    <resultMap type="com.atpco.audit.model.AtpcoTTBS169" id="AtpcoTTBS169">
+        <result column="REC_TYPE" property="recType" jdbcType="VARCHAR"/>
+        <result column="ACTION" property="action" jdbcType="VARCHAR"/>
+        <result column="TBL_ID" property="tblId" jdbcType="VARCHAR"/>
+        <result column="TBL_NO" property="tblNo" jdbcType="VARCHAR"/>
+        <result column="FILLER14" property="filler14" jdbcType="VARCHAR"/>
+        <result column="APPL" property="appl" jdbcType="VARCHAR"/>
+        <result column="PSGR_TYPE" property="psgrType" jdbcType="VARCHAR"/>
+        <result column="AGE_MIN" property="ageMin" jdbcType="VARCHAR"/>
+        <result column="AGE_MAX" property="ageMax" jdbcType="VARCHAR"/>
+        <result column="FILLER24" property="filler24" jdbcType="VARCHAR"/>
+        <result column="PSGR" property="psgr" jdbcType="VARCHAR"/>
+        <result column="GEO_SPEC_TYPE" property="geoSpecType" jdbcType="VARCHAR"/>
+        <result column="GEO_SPEC" property="geoSpec" jdbcType="VARCHAR"/>
+        <result column="PTC_MATCH_TP" property="ptcMatchTp" jdbcType="VARCHAR"/>
+        <result column="REST" property="rest" jdbcType="VARCHAR"/>
+        <result column="MD5" property="md5" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="query169" resultMap="AtpcoTTBS169">
+        select * from ATPCO_TTBS_169 where TBL_NO = #{no}
+    </select>
+</mapper>

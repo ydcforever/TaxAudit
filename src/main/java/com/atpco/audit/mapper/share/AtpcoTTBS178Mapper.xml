@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpco.audit.mapper.share.AtpcoTTBS178Mapper">
+    <resultMap type="com.atpco.audit.model.AtpcoTTBS178" id="AtpcoTTBS178">
+        <result column="REC_TYPE" property="recType" jdbcType="VARCHAR"/>
+        <result column="ACTION" property="action" jdbcType="VARCHAR"/>
+        <result column="TBL_ID" property="tblId" jdbcType="VARCHAR"/>
+        <result column="TBL_NO" property="tblNo" jdbcType="VARCHAR"/>
+        <result column="APPL" property="appl" jdbcType="VARCHAR"/>
+        <result column="GEO_LOC_TYPE" property="geoLocType" jdbcType="VARCHAR"/>
+        <result column="GEO_LOC_VALUE" property="geoLocValue" jdbcType="VARCHAR"/>
+        <result column="REST" property="rest" jdbcType="VARCHAR"/>
+        <result column="MD5" property="md5" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="query178" resultMap="AtpcoTTBS178">
+        SELECT DISTINCT * FROM ATPCO_TTBS_178 WHERE TBL_NO = #{no}
+    </select>
+</mapper>

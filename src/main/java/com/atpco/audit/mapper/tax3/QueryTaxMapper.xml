@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpco.audit.mapper.tax3.QueryTaxMapper">
+	<resultMap type="com.atpco.audit.model.QueryTax" id="QueryTaxs">
+	<!-- QueryTaxs的返回值 -->
+		<result column="TAX_CURRENCY" property="sales_curr" jdbcType="VARCHAR" />
+		<result column="TAX_CODE" property="tax_code" jdbcType="VARCHAR" />
+		<result column="TAX_AMOUNT" property="BTW_AMT" jdbcType="DECIMAL" />
+	</resultMap>
+	<select id="queryTax" parameterType="java.util.Map"
+		statementType="CALLABLE">
+		<!--statementType 存储过程 -->
+		{CALL
+
+-- 		ydc_tax_yq_calculate
+		atpco_tax_yq_computing
+		(
+		#{routing,mode=IN,jdbcType=VARCHAR},
+		#{turnaround_no, mode=IN, jdbcType=NUMERIC},
+		#{booking_date,mode=IN,jdbcType=VARCHAR},
+		#{marketing_carrier,mode=IN,jdbcType=VARCHAR},
+		#{operating_carrier,mode=IN,jdbcType=VARCHAR},
+		#{flights,mode=IN,jdbcType=VARCHAR},
+		#{plane_types,mode=IN,jdbcType=VARCHAR},
+		#{sale_organization,mode=IN,jdbcType=VARCHAR},
+		#{clazz,mode=IN,jdbcType=VARCHAR},
+		#{passenger_type,mode=IN,jdbcType=VARCHAR},
+		#{passenger_age,mode=IN,jdbcType=NUMERIC},
+		#{passenger_identity,mode=IN,jdbcType=VARCHAR},
+		#{passenger_region_type,mode=IN,jdbcType=VARCHAR},
+		#{passenger_region,mode=IN,jdbcType=VARCHAR},
+
+		#{sale_point,mode=IN,jdbcType=VARCHAR},
+		#{ticket_point,mode=IN,jdbcType=VARCHAR},
+		#{sale_currency,mode=IN,jdbcType=VARCHAR},
+		#{fare_base,mode=IN,jdbcType=VARCHAR},
+		#{fare_amount,mode=IN,jdbcType=NUMERIC},
+
+		#{ob_fee,mode=IN,jdbcType=NUMERIC},
+		#{services_flight_related_fee,mode=IN,jdbcType=NUMERIC},
+		#{services_ticket_related_fee,mode=IN,jdbcType=NUMERIC},
+		#{services_merchandise_fee,mode=IN,jdbcType=NUMERIC},
+		#{services_oc_fee,mode=IN,jdbcType=NUMERIC},
+		#{baggage_charges,mode=IN,jdbcType=NUMERIC},
+		#{od_fee,mode=IN,jdbcType=NUMERIC},
+		#{departure_date,mode=IN,jdbcType=VARCHAR},
+		#{arrival_date,mode=IN,jdbcType=VARCHAR},
+		<!-- 燃油费已归入Tax -->
+		#{routing_yq_amount,mode=OUT,jdbcType=NUMERIC},
+		#{routing_yr_amount,mode=OUT,jdbcType=NUMERIC},
+		#{result_recs,jdbcType=CURSOR,javaType=java.sql.ResultSet,resultMap=QueryTaxs,mode=OUT},
+		<!-- resultMap游标支持一个或多个对象查询 -->
+		#{return_label,mode=OUT,jdbcType=INTEGER}
+		)}
+  </select>
+</mapper>

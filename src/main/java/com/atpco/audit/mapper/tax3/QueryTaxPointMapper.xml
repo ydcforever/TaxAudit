@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpco.audit.mapper.tax3.QueryTaxPointMapper">
+    <resultMap type="com.atpco.audit.model.AtpcoTTBSX1" id="AtpcoTtbsX1">
+        <result column="REC_TYPE" property="recType" jdbcType="VARCHAR"/>
+        <result column="NATION" property="nation" jdbcType="VARCHAR"/>
+        <result column="TAX_CODE" property="taxCode" jdbcType="VARCHAR"/>
+        <result column="TAX_TYPE" property="taxType" jdbcType="VARCHAR"/>
+        <result column="TAX_REMITTANCEID" property="taxRemittanceid" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_TAG" property="taxPointTag" jdbcType="VARCHAR"/>
+        <result column="PERCENT_FLATTAG" property="percentFlattag" jdbcType="VARCHAR"/>
+        <result column="SEQ_NO" property="seqNo" jdbcType="VARCHAR"/>
+        <result column="TAX_UNIT_TG_TAG1" property="taxUnitTgTag1" jdbcType="VARCHAR"/>
+        <result column="TAX_UNIT_TG_TAG2" property="taxUnitTgTag2" jdbcType="VARCHAR"/>
+        <result column="TAX_UNIT_TG_TAG3" property="taxUnitTgTag3" jdbcType="VARCHAR"/>
+        <result column="TAX_UNIT_TG_TAG4" property="taxUnitTgTag4" jdbcType="VARCHAR"/>
+        <result column="TAX_UNIT_TG_TAG5" property="taxUnitTgTag5" jdbcType="VARCHAR"/>
+        <result column="TAX_UNIT_TG_TAG6" property="taxUnitTgTag6" jdbcType="VARCHAR"/>
+        <result column="TAX_UNIT_TG_TAG7" property="taxUnitTgTag7" jdbcType="VARCHAR"/>
+        <result column="TAX_UNIT_TG_TAG8" property="taxUnitTgTag8" jdbcType="VARCHAR"/>
+        <result column="TAX_UNIT_TG_TAG9" property="taxUnitTgTag9" jdbcType="VARCHAR"/>
+        <result column="TAX_UNIT_TG_TAG10" property="taxUnitTgTag10" jdbcType="VARCHAR"/>
+        <result column="CALC_ORDER" property="calcOrder" jdbcType="VARCHAR"/>
+        <result column="SALE_DATES_FIRST" property="saleDatesFirst" jdbcType="VARCHAR"/>
+        <result column="SALE_DATES_LAST" property="saleDatesLast" jdbcType="VARCHAR"/>
+        <result column="TRAVEL_DATES_TAG" property="travelDatesTag" jdbcType="VARCHAR"/>
+        <result column="TRAVEL_DATES_FIRST" property="travelDatesFirst" jdbcType="VARCHAR"/>
+        <result column="TRAVEL_DATES_LAST" property="travelDatesLast" jdbcType="VARCHAR"/>
+        <result column="TAX_CARRIER" property="taxCarrier" jdbcType="VARCHAR"/>
+        <result column="CARRIER_APPLTABLE_NO_190" property="carrierAppltableNo190" jdbcType="VARCHAR"/>
+        <result column="RTN_TO_ORIG" property="rtnToOrig" jdbcType="VARCHAR"/>
+        <result column="PTC_TABLE_169" property="ptcTable169" jdbcType="VARCHAR"/>
+        <result column="TICKETED_POINT_TAG" property="ticketedPointTag" jdbcType="VARCHAR"/>
+        <result column="POINT_OF_SALE_TYPE" property="pointOfSaleType" jdbcType="VARCHAR"/>
+        <result column="POINT_OF_SALE_INFO" property="pointOfSaleInfo" jdbcType="VARCHAR"/>
+        <result column="SECURITY_TABLE_NO_183" property="securityTableNo183" jdbcType="VARCHAR"/>
+        <result column="P_OF_TICKETING_GEO_SPEC_TYPE" property="pOfTicketingGeoSpecType" jdbcType="VARCHAR"/>
+        <result column="P_OF_TICKETING_GEO_SPEC_INFO" property="pOfTicketingGeoSpecInfo" jdbcType="VARCHAR"/>
+        <result column="P_OF_DELIVERY_GEO_SPEC_TYPE" property="pOfDeliveryGeoSpecType" jdbcType="VARCHAR"/>
+        <result column="P_OF_DELIVERY_GEO_SPEC_INFO" property="pOfDeliveryGeoSpecInfo" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_INDICATOR" property="jrnyGeoSpecIndicator" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_LOC1_TYPE" property="jrnyGeoSpecLoc1Type" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_LOC1_INFO" property="jrnyGeoSpecLoc1Info" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_LOC2_TYPE" property="jrnyGeoSpecLoc2Type" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_LOC2_INFO" property="jrnyGeoSpecLoc2Info" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_JO_IN_TYPE" property="jrnyGeoSpecJoInType" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_JO_IN_INFO" property="jrnyGeoSpecJoInInfo" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_TRVL_IN_LOC_TYPE" property="jrnyGeoSpecTrvlInLocType" jdbcType="VARCHAR"/>
+        <result column="JRNY_GEO_SPEC_TRVL_IN_LOC_INFO" property="jrnyGeoSpecTrvlInLocInfo" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_LOC1_NATION_DOMESTIC" property="taxPointLoc1NationDomestic" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_LOC1_TRANSFER_TYPE" property="taxPointLoc1TransferType" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_LOC1_STOPOVER_TAG" property="taxPointLoc1StopoverTag" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_LOC1_TYPE" property="taxPointLoc1Type" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_LOC1_INFO" property="taxPointLoc1Info" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_LOC2_NATION_DOMESTIC" property="taxPointLoc2NationDomestic" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_LOC2_COMPARISON" property="taxPointLoc2Comparison" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_LOC2_STOPOVER_TAG" property="taxPointLoc2StopoverTag" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_LOC2_TYPE" property="taxPointLoc2Type" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_LOC2_INFO" property="taxPointLoc2Info" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_LOC3_LOC3TYPE" property="taxPointLoc3Loc3type" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_LOC3_TYPE" property="taxPointLoc3Type" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_LOC3_INFO" property="taxPointLoc3Info" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_QUALIF_TAGS_STOP_TAG" property="taxPointQualifTagsStopTag" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_QUALIF_TAGS_ST_UNIT" property="taxPointQualifTagsStUnit" jdbcType="VARCHAR"/>
+        <result column="TAX_POINT_QUALIF_TAGS_CONN_TAG" property="taxPointQualifTagsConnTag" jdbcType="VARCHAR"/>
+        <result column="SERVICE_AND_BAGGAGE_APP_TAG" property="serviceAndBaggageAppTag" jdbcType="VARCHAR"/>
+        <result column="SERVICE_AND_BAGGAGE_TABLE_168" property="serviceAndBaggageTable168" jdbcType="VARCHAR"/>
+        <result column="CXF_OR_FLT_TBL_NO_186" property="cxfOrFltTblNo186" jdbcType="VARCHAR"/>
+        <result column="SECTOR_DETAIL_APPLICATION_TAG" property="sectorDetailApplicationTag" jdbcType="VARCHAR"/>
+        <result column="SECTOR_DETAIL_TABLE_NO_167" property="sectorDetailTableNo167" jdbcType="VARCHAR"/>
+        <result column="TICKET_VALUE_APPLICATION" property="ticketValueApplication" jdbcType="VARCHAR"/>
+        <result column="TICKET_VALUE_MINIMUM" property="ticketValueMinimum" jdbcType="VARCHAR"/>
+        <result column="TICKET_VALUE_MAXIMUM" property="ticketValueMaximum" jdbcType="VARCHAR"/>
+        <result column="TICKET_VALUE_CURRENCY" property="ticketValueCurrency" jdbcType="VARCHAR"/>
+        <result column="X1_DECIMAL" property="x1Decimal" jdbcType="VARCHAR"/>
+        <result column="CURRENCY_OF_SALE" property="currencyOfSale" jdbcType="VARCHAR"/>
+        <result column="PAID_BY_THIRD_PARTY" property="paidByThirdParty" jdbcType="VARCHAR"/>
+        <result column="RATD_DATE" property="ratdDate" jdbcType="VARCHAR"/>
+        <result column="HISTORYIC_SALE_EFFECTIVE" property="historyicSaleEffective" jdbcType="VARCHAR"/>
+        <result column="HISTORIC_SALE_DISCOUNT" property="historicSaleDiscount" jdbcType="VARCHAR"/>
+        <result column="HISTORIC_TRAVEL_EFFECTIVE" property="historicTravelEffective" jdbcType="VARCHAR"/>
+        <result column="HISTORIC_TRAVEL_DISCOUNT" property="historicTravelDiscount" jdbcType="VARCHAR"/>
+        <result column="TAX_CALCULATION_AMOUNT" property="taxCalculationAmount" jdbcType="VARCHAR"/>
+        <result column="TAX_CALCULATION_CUR" property="taxCalculationCur" jdbcType="VARCHAR"/>
+        <result column="TAX_CALCULATION_DEC" property="taxCalculationDec" jdbcType="VARCHAR"/>
+        <result column="TAX_CALCULATION_PERCENT" property="taxCalculationPercent" jdbcType="VARCHAR"/>
+        <result column="TAX_CALCULATION_MINIMUM_TAX" property="taxCalculationMinimumTax" jdbcType="VARCHAR"/>
+        <result column="TAX_CALCULATION_MAXIMUM_TAX" property="taxCalculationMaximumTax" jdbcType="VARCHAR"/>
+        <result column="TAX_CALCULATION_MIN_MAX_CURR" property="taxCalculationMinMaxCurr" jdbcType="VARCHAR"/>
+        <result column="TAX_CALCULATION_MIN_MAX_DECI" property="taxCalculationMinMaxDeci" jdbcType="VARCHAR"/>
+        <result column="TAX_CALCULATION_VAT_INCLUSIVE" property="taxCalculationVatInclusive" jdbcType="VARCHAR"/>
+        <result column="TAX_CALCULATION_TAX_APP_TO_TAG" property="taxCalculationTaxAppToTag" jdbcType="VARCHAR"/>
+        <result column="TAX_CALCULATION_TAX_APPL_LIMIT" property="taxCalculationTaxApplLimit" jdbcType="VARCHAR"/>
+        <result column="TAX_CALCULATION_REMIT_APPL_TAG" property="taxCalculationRemitApplTag" jdbcType="VARCHAR"/>
+        <result column="TAX_ROUND_UNIT" property="taxRoundUnit" jdbcType="VARCHAR"/>
+        <result column="TAX_ROUND_DIR" property="taxRoundDir" jdbcType="VARCHAR"/>
+        <result column="ALTERNATE_TAX_RULE_REF_TAG" property="alternateTaxRuleRefTag" jdbcType="VARCHAR"/>
+        <result column="TXT_TBL_NO_164" property="txtTblNo164" jdbcType="VARCHAR"/>
+        <result column="TAX_PROCESSING_APPL_TAG" property="taxProcessingApplTag" jdbcType="VARCHAR"/>
+        <result column="TAX_MATCHING_APPL_TAG" property="taxMatchingApplTag" jdbcType="VARCHAR"/>
+        <result column="OUTPUT_TYPE_INDICATOR" property="outputTypeIndicator" jdbcType="VARCHAR"/>
+        <result column="EXEMPT_TAG" property="exemptTag" jdbcType="VARCHAR"/>
+        <result column="HEADER_ID" property="headerId" jdbcType="VARCHAR"/>
+        <result column="ID" property="id" jdbcType="VARCHAR"/>
+
+        <result column="RN" property="row" jdbcType="VARCHAR" javaType="String"/>
+        <result column="TAX_AMOUNT" property="exchangeAmount" jdbcType="VARCHAR" javaType="String"/>
+        <result column="TAX_PERCENT" property="percent" jdbcType="VARCHAR" javaType="String"/>
+        <result column="CUR" property="cur" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryTaxPoint" parameterType="java.util.Map"
+            statementType="CALLABLE">
+        <!--statementType 存储过程 -->
+        {CALL
+        YDC_TAX_POINT_FEE(
+        #{routing,mode=IN,jdbcType=VARCHAR},
+        #{tax_point_no,mode=IN,jdbcType=VARCHAR},
+        #{stopover_status,mode=IN,jdbcType=VARCHAR},
+        #{booking_date,mode=IN,jdbcType=VARCHAR},
+        #{travel_date,mode=IN,jdbcType=VARCHAR},
+        #{marketing_carrier,mode=IN,jdbcType=VARCHAR},
+        #{operating_carrier,mode=IN,jdbcType=VARCHAR},
+        #{sale_point,mode=IN,jdbcType=VARCHAR},
+        #{ticket_point,mode=IN,jdbcType=VARCHAR},
+        #{clazz,mode=IN,jdbcType=VARCHAR},
+        #{i_passenger_type,mode=IN,jdbcType=VARCHAR},
+        #{i_passenger_age,mode=IN,jdbcType=NUMERIC},
+        #{passenger_identity,mode=IN,jdbcType=VARCHAR},
+        #{passenger_region_type,mode=IN,jdbcType=VARCHAR},
+        #{passenger_region,mode=IN,jdbcType=VARCHAR},
+        #{sale_currency,mode=IN,jdbcType=VARCHAR},
+        #{sale_organization,mode=IN,jdbcType=VARCHAR},
+        #{fare_base,mode=IN,jdbcType=VARCHAR},
+        #{departure_date,mode=IN,jdbcType=VARCHAR},
+        #{arrival_date,mode=IN,jdbcType=VARCHAR},
+        #{tax_point,mode=OUT,jdbcType=VARCHAR},
+        #{result_recs,jdbcType=CURSOR,javaType=java.sql.ResultSet,resultMap=AtpcoTtbsX1,mode=OUT}
+        )}
+    </select>
+</mapper>
