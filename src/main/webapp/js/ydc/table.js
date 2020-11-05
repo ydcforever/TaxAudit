@@ -49,7 +49,7 @@ Table.datagrid = {
         config.title = title;
         config.url = url;
         config.columns = columns;
-        if (cellClickFun != undefined) {
+        if (cellClickFun !== undefined) {
             config.onClickCell = function (rowIndex, field, value) {
                 cellClickFun(field, value);
             };

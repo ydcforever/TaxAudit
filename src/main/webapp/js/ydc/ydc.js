@@ -136,7 +136,7 @@ YDC.audio = {
 };
 
 YDC.dateOperation = {
-    today: function (date) {
+    dt: function (date) {
         this.year = date.getFullYear();
         this.month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
         this.day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
@@ -144,9 +144,18 @@ YDC.dateOperation = {
         this.minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
         this.second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
     },
-    currentDate: function () {
-        var today = new this.today(new Date());
+    getDate: function (date) {
+        var today = new this.dt(date);
         return today.year + '-' + today.month + '-' + today.day;
+    },
+    currentDate: function () {
+        var today = new this.dt(new Date());
+        return today.year + '-' + today.month + '-' + today.day;
+    },
+    nextDate: function () {
+        var today = new Date();
+        var next = new this.dt(new Date(today.getTime() + 24 * 60 * 60 * 1000));
+        return next.year + '-' + next.month + '-' + next.day;
     }
 };
 

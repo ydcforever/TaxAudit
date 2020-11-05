@@ -59,11 +59,6 @@
                 });
                 var queryCondition = encodeURIComponent($.toJSON(object));
                 Table.datagrid.load($("#routing-table"), "Test", './test/queryRouting.do?queryCondition=' + queryCondition, routingCols);
-
-//                var options = $("#routing-table").datagrid("getPager").data("pagination").options;
-//                console.log(options.pageNumber);
-//                console.log(options.total);
-//                console.log(options.pageSize);
             });
 
             $("#routing-table").datagrid({
@@ -107,7 +102,7 @@
                             markStar: true,
                             isInit: true,
                             initData: YDC.dateOperation.currentDate(),
-                            classify: "taxPoint tax2 rest easyui-databox"
+                            classify: "taxPoint tax2 rest easyui-datebox"
                         },
                         {
                             label: 'psgType',
@@ -115,7 +110,7 @@
                             markStar: true,
                             useDataList: true,
                             isInit: true,
-                            initData: ['ADT', 'CHD', 'INF'],
+                            initData: ['ADT', 'CHD', 'INF',"INS"],
                             selectedData : "ADT",
                             classify: "taxPoint portion hp tax2 rest"
                         },
@@ -155,20 +150,28 @@
                         {
                             label: 'marketingCarrier',
                             field: 'marketing_carrier',
-                            fieldCol : "5",
+                            fieldCol : "2",
                             isInit:true,
                             initData: "MU;MU",
                             classify: "taxPoint rest"
+                        }, {
+                            label: 'operatingCarrier',
+                            field: 'operating_carrier',
+                            fieldCol : "2",
+                            isInit:true,
+                            initData: "MU;MU",
+                            classify: "taxPoint hp rest portion"
                         }
                     ]
                 },
+//                {
+//                    data: [
+//                        {label: 'operatingCarrier', field: 'operating_carrier', fieldCol : "5",
+//                            isInit:true, initData: "MU;MU",
+//                            classify: "taxPoint hp rest portion"}
+//                    ]
+//                },
                 {
-                    data: [
-                        {label: 'operatingCarrier', field: 'operating_carrier', fieldCol : "5",
-                            isInit:true, initData: "MU;MU",
-                            classify: "taxPoint hp rest portion"}
-                    ]
-                }, {
                     data: [
                         {label: 'fareBase', field: 'fare_base', classify: "taxPoint"},
                         {label: 'fareAmount', field: 'fare_amount', isInit:true, initData: "0", classify:"tax2 rest"},
@@ -193,7 +196,7 @@
                             field: 'departure_date',
                             fieldCol : "5",
                             isInit : true,
-                            initData : "2019-11-01 10:00;2019-11-02 10:00",
+                            initData : YDC.dateOperation.currentDate() + " 10:00;"+ YDC.dateOperation.nextDate() + " 10:00",
                             classify: "taxPoint portion hp tax2 rest"}
                     ]
                 }, {
@@ -203,7 +206,7 @@
                             field: 'arrival_date',
                             fieldCol : "5",
                             isInit : true,
-                            initData : "2019-11-01 12:00;2019-11-02 12:00",
+                            initData : YDC.dateOperation.currentDate() + " 12:00;"+ YDC.dateOperation.nextDate() + " 14:00",
                             classify: "taxPoint portion hp tax2 rest"}
                     ]
                 }, {
@@ -235,25 +238,6 @@
             ];
             new QueryConditions($('#param'), queryTaxYQCondition, 'queryInput');
 
-            $('#booking_date').datebox({
-                closeText:"关闭",
-                formatter:function(date){
-                    var y = date.getFullYear();
-                    var m = date.getMonth() + 1;
-                    var d = date.getDate();
-
-                    return y+"-"+m+"-"+d;
-                },
-                parser:function(str){
-                    var t = Date.parse(str);
-                    if (!isNaN(t))
-                        return new Date(t);
-                    else
-                        return new Date();
-                }
-            });
-            //$(".combo-text").css({"text-align" : "center"});
-
             var taxPointCondition = [
                 {
                     data: [
@@ -261,8 +245,11 @@
                         {
                             label: 'travelDate',
                             field: 'travel_date',
+                            width : '175%',
                             isInit: true,
-                            initData: $("#booking_date").val()
+                            initData: $("#booking_date").val(),
+                            classify : "easyui-datebox"
+
                         },
                         {label: 'stopStatues', field: 'stopover_status'}
                     ]
@@ -294,13 +281,17 @@
                             field: 'atpco_booking_date',
                             markStar: true,
                             isInit : true,
-                            initData : $("#booking_date").val()
+                            width : '175%',
+                            initData : $("#booking_date").val(),
+                            classify : "easyui-datebox"
                         }, {
                             label: 'travelDate',
                             field: 'atpco_travel_date',
                             markStar: true,
                             isInit : true,
-                            initData : $("#booking_date").val()
+                            width : '175%',
+                            initData : $("#booking_date").val(),
+                            classify : "easyui-datebox"
                         }
                     ]
                 }, {
@@ -348,11 +339,26 @@
 
             $('.querySpan').css({'width': '150px'});
 
+            $('.easyui-datebox').datebox({
+                closeText:"关闭",
+                formatter:function(date){
+                    var y = date.getFullYear();
+                    var m = date.getMonth() + 1;
+                    var d = date.getDate();
+
+                    return y+"-"+ (m>10?m:("0"+m)) + "-" + (d>10?d:("0"+d));
+                },
+                parser:function(str){
+                    var t = Date.parse(str);
+                    if (!isNaN(t))
+                        return new Date(t);
+                    else
+                        return new Date();
+                }
+            });
+
             $("#query").click(function () {
-                var object = {};
-                $('.queryInput').each(function () {
-                    object[$(this).attr('id')] = $(this).val();
-                });
+                var object = getParam($('.queryInput'));
                 $.ajax({
                     url: './tax3/queryTax.do',
                     data: {queryCondition: $.toJSON(object)},
@@ -375,7 +381,7 @@
             });
 
             var cntHP = localStorage.getItem("cntHP");
-            if (cntHP == undefined) {
+            if (cntHP === undefined) {
                 cntHP = 0;
                 localStorage.setItem("cntHP", cntHP);
             }
@@ -385,10 +391,7 @@
                 cntHP++;
                 localStorage.setItem("cntHP", cntHP);
                 $("#cntHP").attr("value",cntHP);
-                var object = {};
-                $('.hp').each(function () {
-                    object[$(this).attr('id')] = $(this).val();
-                });
+                var object = getParam($('.hp'));
                 $.ajax({
                     url: './HP/query.do',
                     data: {queryCondition: $.toJSON(object)},
@@ -412,11 +415,11 @@
                 });
             });
 
-            $("#booking_date").on("change",function() {
-                var date = $("#booking_date").val();
-                $("#travel_date").attr("value", date);
-                $("#atpco_booking_date").attr("value", date);
-                $("#atpco_travel_date").attr("value", date);
+            $('#booking_date').datebox({
+                onSelect: function(date){
+                    var a = YDC.dateOperation.getDate(date);
+                    $(".easyui-datebox").datebox("setValue", a);
+                }
             });
 
             $("#air").blur(function () {
@@ -437,28 +440,19 @@
                 });
             });
             $("#queryTaxPoint").click(function () {
-                var object = {};
-                $('.taxPoint').each(function () {
-                    object[$(this).attr('id')] = $(this).val();
-                });
+                var object = getParam($(".taxPoint"));
                 var queryCondition = encodeURIComponent($.toJSON(object));
                 Table.datagrid.load($("#ttbs-table"), "X1", "./tax3/queryTaxPoint.do?queryCondition=" + queryCondition, x1Columns, createTTBSSubTable);
             });
 
             $("#queryPortion").click(function () {
-                var object = {};
-                $('.portion').each(function () {
-                    object[$(this).attr('id')] = $(this).val();
-                });
+                var object = getParam($(".portion"));
                 var queryCondition = encodeURIComponent($.toJSON(object));
                 Table.datagrid.load($("#yqyr-table"), "S1", "./tax3/queryPortion.do?queryCondition=" + queryCondition, S1Columns, createYQYRSubTable);
             });
 
             $("#queryTax2").click(function() {
-                var object = {};
-                $('.tax2').each(function () {
-                    object[$(this).attr('id')] = $(this).val();
-                });
+                var object = getParam($(".tax2"));
                 $.ajax({
                     url: './tax2/queryTax.do',
                     data: {queryCondition: $.toJSON(object)},
@@ -481,10 +475,7 @@
             });
 
             $("#queryTax2Ex").click(function() {
-                var object = {};
-                $('.tax2').each(function () {
-                    object[$(this).attr('id')] = $(this).val();
-                });
+                var object = getParam($(".tax2"));
                 $.ajax({
                     url: './tax2Ex/queryTax.do',
                     data: {queryCondition: $.toJSON(object)},
@@ -507,7 +498,7 @@
             });
 
             $("#queryRestPro").click(function(){
-                var obj = getParam($(".queryInput"));
+                var obj = getParam($(".rest"));
                 $.ajax({
                     url: './restful/pro3.do',
                     data: {queryCondition: $.toJSON(obj)},
@@ -531,10 +522,7 @@
             });
 
             $("#queryRest").click(function(){
-                var object = {};
-                $('.rest').each(function () {
-                    object[$(this).attr('id')] = $(this).val();
-                });
+                var object = getParam($(".rest"));
                 $.ajax({
                     url: './restful/query.do',
                     data: {queryCondition: $.toJSON(object)},

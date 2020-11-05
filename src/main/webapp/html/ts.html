@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<table class="table_form">
+    <div id="param" style="margin-left: 150px;">
+        <tr id="param0">
+            <td>
+                <span class="querySpan" style="display: inline-block; text-align: right; width: 150px;">航线</span>
+                <span style="float: right; color: red;">*</span>
+            </td>
+            <td colspan="5">
+                <input type="text" id="routing" class="queryInput taxPoint portion hp tax2 rest"
+                       style="box-sizing: border-box; text-align: center; width: 100%;">
+            </td>
+        </tr>
+        <tr id="param1">
+            <td>
+                <span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">bookingDate</span>
+                <span style="float: right; color: red;">*</span>
+            </td>
+            <td>
+                <input id="booking_date" class="Wdate" type="text" size="12"
+                       onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',minDate:'%y-%M-%d'});"
+                       style="width: 100px;float:left"/>
+
+                <div id="fanchengTag1" style="display: none ;float:left">
+                    <div style="float:left">&nbsp;-&nbsp;</div>
+                    <input id="inputTime-lkp1" class="Wdate" type="text" size="12"
+                           onclick="WdatePicker({minDate:'%y-%M-%d'})"
+                           onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'inputTime-lkp\')||\'%y-%M-%d\'}'});"
+                           style="width: 100px;float:left"/>
+                </div>
+            </td>
+
+            <td><span class="querySpan" style="display: inline-block; text-align: right; width: 150px;">psgType</span>
+                <span style="float: right; color: red;">*</span></td>
+            <td>
+                <input type="text" id="passenger_type" class="queryInput taxPoint portion hp tax2 rest"
+                       list="passenger_typeData" style="box-sizing: border-box; text-align: center; width: 100%;">
+                <datalist id="passenger_typeData"><select id="passenger_typeSelect">
+                    <option value="ADT"></option>
+                    <option value="CHD"></option>
+                    <option value="INF"></option>
+                    <option value="INS"></option>
+                </select></datalist>
+            </td>
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">psgAge</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="passenger_age" class="queryInput taxPoint"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+        </tr>
+        <tr id="param2">
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">psgIdentity</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="passenger_identity" class="queryInput taxPoint" list="passenger_identityData"
+                       style="box-sizing: border-box; text-align: center; width: 100%;">
+                <datalist id="passenger_identityData"><select id="passenger_identitySelect">
+                    <option value="R"></option>
+                    <option value="E"></option>
+                    <option value="N"></option>
+                </select></datalist>
+            </td>
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">psgRegionType</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="passenger_region_type" class="queryInput taxPoint"
+                       list="passenger_region_typeData"
+                       style="box-sizing: border-box; text-align: center; width: 100%;">
+                <datalist id="passenger_region_typeData"><select id="passenger_region_typeSelect">
+                    <option value="P"></option>
+                    <option value="C"></option>
+                    <option value="S"></option>
+                    <option value="N"></option>
+                    <option value="Z"></option>
+                    <option value="A"></option>
+                </select></datalist>
+            </td>
+            <td><span class="querySpan" style="display: inline-block; text-align: right; width: 150px;">psgRegion</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="passenger_region" class="queryInput taxPoint"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+        </tr>
+        <tr id="param3">
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">saleOrganization</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="sale_organization" class="queryInput taxPoint"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+            <td><span class="querySpan" style="display: inline-block; text-align: right; width: 150px;">salePoint</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="sale_point" class="queryInput taxPoint"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">ticketPoint</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="ticket_point" class="queryInput taxPoint"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+        </tr>
+        <tr id="param4">
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">marketingCarrier</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td colspan="5"><input type="text" id="marketing_carrier" class="queryInput taxPoint rest"
+                                   style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+        </tr>
+        <tr id="param5">
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">operatingCarrier</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td colspan="5"><input type="text" id="operating_carrier" class="queryInput taxPoint hp rest portion"
+                                   style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+        </tr>
+        <tr id="param6">
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">fareBase</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="fare_base" class="queryInput taxPoint"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">fareAmount</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="fare_amount" class="queryInput tax2 rest"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">obFee</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="ob_fee" class="queryInput"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+        </tr>
+        <tr id="param7">
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">flightRelatedFee</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="services_flight_related_fee" class="queryInput"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">ticketRelatedFee</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="services_ticket_related_fee" class="queryInput"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">merchandiseFee</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="services_merchandise_fee" class="queryInput"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+        </tr>
+        <tr id="param8">
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">servicesOcFee</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="services_oc_fee" class="queryInput"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">baggageCharges</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="baggage_charges" class="queryInput"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">odFee</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="od_fee" class="queryInput"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+        </tr>
+        <tr id="param9">
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">departDate</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td colspan="5"><input type="text" id="departure_date" class="queryInput taxPoint portion hp tax2 rest"
+                                   style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+        </tr>
+        <tr id="param10">
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">arriveDate</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td colspan="5"><input type="text" id="arrival_date" class="queryInput taxPoint portion hp tax2 rest"
+                                   style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+        </tr>
+        <tr id="param11">
+            <td><span class="querySpan"
+                      style="display: inline-block; text-align: right; width: 150px;">clazz</span><span
+                    style="float: right; color: red;">*</span></td>
+            <td><input type="text" id="clazz" class="queryInput taxPoint hp tax2 rest portion"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+            <td><span class="querySpan" style="display: inline-block; text-align: right; width: 150px;">cur</span><span
+                    style="float: right; color: red;">*</span></td>
+            <td><input type="text" id="sale_currency" class="queryInput taxPoint hp tax2 rest" list="sale_currencyData"
+                       style="box-sizing: border-box; text-align: center; width: 100%;">
+                <datalist id="sale_currencyData"><select id="sale_currencySelect"></select></datalist>
+            </td>
+            <td><span class="querySpan" style="display: inline-block; text-align: right; width: 150px;">折返点</span><span
+                    style="float: right; color: rgba(255, 0, 0, 0);">*</span></td>
+            <td><input type="text" id="turnaround_no" class="queryInput"
+                       style="box-sizing: border-box; text-align: center; width: 100%;"></td>
+        </tr>
+    </div>
+</table>
+<hr>
+</body>
+</html>

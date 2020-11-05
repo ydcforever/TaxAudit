@@ -13,7 +13,7 @@
 		{CALL
 
 -- 		ydc_tax_yq_calculate
-		atpco_tax_yq_computing
+		atpco_tax_yq_computing_new
 		(
 		#{routing,mode=IN,jdbcType=VARCHAR},
 		#{turnaround_no, mode=IN, jdbcType=NUMERIC},

@@ -26,7 +26,11 @@
 function getParam($class) {
     var object = {};
     $class.each(function () {
-        object[$(this).attr('id')] = $(this).val();
+        if($(this).hasClass("easyui-datebox")) {
+            object[$(this).attr('id')] = $(this).datebox("getValue");
+        }else{
+            object[$(this).attr('id')] = $(this).val();
+        }
     });
     return object;
 }

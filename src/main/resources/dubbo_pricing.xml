@@ -7,7 +7,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
 
 	<dubbo:application name="1" />
-	<dubbo:registry protocol="zookeeper" address="10.18.3.42:2181" />
+	<dubbo:registry protocol="zookeeper" address="10.18.3.45:2181" />
 
 	<dubbo:reference id="outPricingService"
 		interface="com.ceair.muibe.provider.pricing.OutPricingService"
